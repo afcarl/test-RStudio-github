@@ -3,9 +3,12 @@
 
 ## knitr を使えば R のコードと結果を HTML に出力できる
 
-xy 平面上に乱数を 100 組生成して描画する．
+iris データを多次元尺度法に掛けて，色分けして描画する．
 
 ```{r warning=FALSE}
-data <- data.frame(x=rnorm(100), y=rnorm(100))
-plot(data)
+iris.dist <-dist(iris[,-5]) 
+iris.cmd <- cmdscale(iris.dist)
+plot(iris.cmd, type="n")
+iris.lab <- factor(c(rep("S",50), rep("C",50), rep("V",50)))
+text(iris.cmd,labels=iris.lab,col=unclass(iris.lab))
 ```
